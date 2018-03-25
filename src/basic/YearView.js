@@ -922,9 +922,7 @@ var YearView = FC.YearView = View.extend({
 			renderRange.end.add(1, 'week').startOf('week'); // exclusively move backwards
 
 			// calculate weeks in month or display 6 weeks
-                	var rStart = moment(renderRange.start).utc().startOf('month');
-                	var rEnd = moment(renderRange.end).utc().endOf('month');
-                	var nrofWeeks = moment.duration(rEnd - rStart).weeks() + 1;
+                	var nrofWeeks = renderRange.end.diff(renderRange.start, 'weeks');
 			var rowCnt = Math.ceil( // could be partial weeks due to hiddenDays
 				renderRange.end.diff(renderRange.start, 'weeks', true) // dontRound=true
 			);
