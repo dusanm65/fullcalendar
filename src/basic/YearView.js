@@ -921,11 +921,12 @@ var YearView = FC.YearView = View.extend({
 			// make end-of-week if not already
 			renderRange.end.add(1, 'week').startOf('week'); // exclusively move backwards
 
-			//ensure 6 weeks
+			// calculate weeks in month or display 6 weeks
+                	var nrofWeeks = renderRange.end.diff(renderRange.start, 'weeks');
 			var rowCnt = Math.ceil( // could be partial weeks due to hiddenDays
 				renderRange.end.diff(renderRange.start, 'weeks', true) // dontRound=true
 			);
-			renderRange.end.add(6 - rowCnt, 'weeks');
+                	renderRange.end.add(((this.isFixedWeeks) ? 6 : nrofWeeks) - rowCnt, 'weeks');
 
 			dayGrid.setRange(renderRange);
 
